@@ -23,6 +23,4 @@ MULTIPLES_OF.each do |multiple|
   end
 end
 
-in_list.each_index { |index| puts "#{index}: #{in_list[index]}" }
-
 pp "Sum of multiples: #{sum_of_multiples.to_s}"
