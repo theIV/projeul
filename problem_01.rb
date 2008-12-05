@@ -8,6 +8,8 @@
 require 'rubygems'
 require 'pp'
 
+time_start = Time.now
+
 MULTIPLES_OF  = [3,5]
 LESS_THAN     = 1000
 
@@ -23,4 +25,8 @@ MULTIPLES_OF.each do |multiple|
   end
 end
 
+time_end = Time.now
+duration = time_end - time_start
+
 pp "Sum of multiples: #{sum_of_multiples.to_s}"
+pp "Duration: #{duration}"

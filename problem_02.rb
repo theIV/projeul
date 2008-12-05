@@ -11,12 +11,12 @@
 require 'rubygems'
 require 'pp'
 
-UPPER_BOUND     = 4000000
+time_start = Time.now
 
-fibonacci_values = Array.new
+UPPER_BOUND         = 4000000
+fibonacci_values    = Array.new
 fibonacci_values[0] = 1
-
-sum_of_evens    = 0
+sum_of_evens        = 0
 
 while fibonacci_values.last < UPPER_BOUND
   if fibonacci_values.last%2 == 0
@@ -26,4 +26,8 @@ while fibonacci_values.last < UPPER_BOUND
   pp fibonacci_values.last
 end
 
+time_end = Time.now
+duration = time_end - time_start
+
 pp "Sum of all even numbers in the Fibonnaci sequence up to #{UPPER_BOUND}: #{sum_of_evens}"
+pp "Duration: #{duration}"
