@@ -14,6 +14,7 @@ def sum_of_primes_below(number)
   sum_of_primes = 0
 
   number.downto(1) do |number|
+    pp number
     sum_of_primes += number if is_a_prime?(number)
   end
 
@@ -39,3 +40,27 @@ def is_a_prime?(number)
 end
 
 sum_of_primes_below(2000000)
+
+# require 'mathn'
+# 
+# def solution2
+#   time_start = Time.now
+# 
+#   prime = Prime.new
+#   sum_of_primes = 0
+#   next_prime = prime.next
+# 
+#   until next_prime > 2000000
+#     pp next_prime
+#     sum_of_primes += next_prime
+#     next_prime = prime.next
+#   end
+# 
+#   time_end = Time.now
+#   duration = time_end - time_start
+# 
+#   pp "Sum of primes below 2000000 is #{sum_of_primes}."
+#   pp "Duration: #{duration}"
+# end
+# 
+# solution2

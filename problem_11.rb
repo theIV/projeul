@@ -1,6 +1,6 @@
 # Problem 11
 # 
-# In the 2020 grid below, four numbers along a diagonal line have been marked in
+# In the 20x20 grid below, four numbers along a diagonal line have been marked in
 # red.
 # 
 # 08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
@@ -23,7 +23,7 @@
 # 20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
 # 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
 # 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48
-# The product of these numbers is 26  63  78  14 = 1788696.
+# The product of these numbers is 26x63x78x14 = 1788696.
 # 
 # What is the greatest product of four adjacent numbers in any direction
 # (up, down, left, right, or diagonally) in the 2020 grid?
@@ -35,17 +35,55 @@ def greatest_product_in_grid(seed)
   time_start = Time.now
 
   greatest_product = 0
+  length = seed.length
 
-  
+  (0..length-1).each do |row|
+    (0..length-1).each do |column|
+      if (column < 17)
+        product = seed[row][column] *
+                  seed[row][column+1] *
+                  seed[row][column+2] *
+                  seed[row][column+3]
+        greatest_product = product if product > greatest_product
+      end
+
+      if row < 17
+        product = seed[row][column] *
+                  seed[row+1][column] *
+                  seed[row+2][column] *
+                  seed[row+3][column]
+        greatest_product = product if product > greatest_product
+
+        if column < 17
+          product = seed[row][column] *
+                    seed[row+1][column+1] *
+                    seed[row+2][column+2] *
+                    seed[row+3][column+3]
+          greatest_product = product if product > greatest_product
+        end
+
+        if column > 2
+          product = seed[row][column] *
+                    seed[row+1][column-1] *
+                    seed[row+2][column-2] *
+                    seed[row+3][column-3]
+          greatest_product = product if product > greatest_product
+        end
+
+      end
+
+    end
+
+  end
 
   time_end = Time.now
   duration = time_end - time_start
 
-  pp "Sum of primes below #{below} is #{sum_of_primes}."
+  pp "Greatest product is #{greatest_product}."
   pp "Duration: #{duration}"
 end
 
-grid_str = <<-EOS
+seed_string = <<-EOS
 08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
@@ -69,7 +107,7 @@ grid_str = <<-EOS
 EOS
  
 grid = []
-grid_str.strip.split(/\n/).each do |row|
+seed_string.strip.split(/\n/).each do |row|
   grid << row.split(/ /).map { |s| s.to_i }
 end
 
